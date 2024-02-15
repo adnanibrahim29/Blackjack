@@ -62,10 +62,10 @@ public class blackJack {
         int card4 = drawRandomCard(); // Draw second card for dealer
         total2 = calculateTotal(card3, total2); // Update dealer's total with the initial card
         total2 = calculateTotal(card4, total2); // Update dealer's total with the second card
-        System.out.println(p2Name + "first card: \n" + cardString(card3));
-        System.out.println(p2Name +  "Second card: \n" + cardString(card4));
+        System.out.println(p2Name + " first card: \n" + cardString(card3));
+        System.out.println(p2Name +  " Second card: \n" + cardString(card4));
 
-        System.out.println(p2Name + "Current Total is: " + total2);
+        System.out.println(p2Name + " Current Total is: " + total2);
 
         // Assuming dealer follows traditional rules of hitting until reaching a soft 17
         while (total2 < 17) {
@@ -75,9 +75,9 @@ public class blackJack {
             } else if (option.equals("h")) {
                 int newCard = drawRandomCard();
                 System.out.println("Your new Card is: \n" + cardString(newCard));
-                total = calculateTotal(newCard, total);
-                System.out.println("Your new Total is: " + total);
-                if (total > 21) {
+                total2 = calculateTotal(newCard, total2);
+                System.out.println("Your new Total is: " + total2);
+                if (total2 > 21) {
                     System.out.println("Bust!");
                     break;
                 }
@@ -131,21 +131,20 @@ public class blackJack {
      * @return (int)
      */
 
-    public static int calculateTotal(int newCard, int currentTotal) { // Calculating the total
+     public static int calculateTotal(int newCard, int currentTotal) {
         if (newCard == 1) {
-            numberOfAcesAsEleven++; // Count this Ace as 11 initially
+            numberOfAcesAsEleven++;
             currentTotal += 11;
         } else if (newCard >= 2 && newCard <= 9) {
             currentTotal += newCard;
         } else {
-            currentTotal += 10; // Face cards count as 10
+            currentTotal += 10;
         }
-
-        // Adjust for Aces if total exceeds 21
         while (currentTotal > 21 && numberOfAcesAsEleven > 0) {
-            currentTotal -= 10; // Change an Ace from 11 to 1
+            currentTotal -= 10;
             numberOfAcesAsEleven--;
         }
+    
         return currentTotal;
     }
 
